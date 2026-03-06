@@ -1,0 +1,173 @@
+/* GLOBAL PAGE */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #0d1117;
+    color: #c9d1d9;
+    font-family: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+
+/* SCREEN HANDLING */
+
+.screen {
+    display: none;
+    padding: 40px;
+    text-align: center;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* HEADINGS */
+
+h1, h2 {
+    color: #58a6ff;
+}
+
+/* INTRO STORY */
+
+.story {
+    max-width: 700px;
+    margin: 20px auto;
+    line-height: 1.6;
+}
+
+.alfred {
+    max-width: 700px;
+    margin: 30px auto;
+    background: #161b22;
+    padding: 20px;
+    border-left: 4px solid #d29922;
+    text-align: left;
+}
+
+/* BUTTONS */
+
+button {
+    background: transparent;
+    color: #58a6ff;
+    border: 1px solid #58a6ff;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: #58a6ff;
+    color: #0d1117;
+}
+
+/* TERMINAL WINDOW */
+
+.terminal {
+    max-width: 900px;
+    height: 70vh;
+    margin: 40px auto;
+    background: #161b22;
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+}
+
+/* TERMINAL OUTPUT AREA */
+
+#terminalOutput {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    text-align: left;
+    font-size: 14px;
+}
+
+/* TERMINAL INPUT */
+
+.terminal-input {
+    display: flex;
+    border-top: 1px solid #30363d;
+    padding: 12px;
+}
+
+.prompt {
+    color: #3fb950;
+    margin-right: 10px;
+}
+
+/* INPUT FIELD */
+
+#terminalInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #c9d1d9;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* ALFRED HINT */
+
+.alfred-hint {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #161b22;
+    padding: 15px;
+    border-left: 4px solid #d29922;
+    text-align: left;
+}
+
+/* QUIZ SECTION */
+
+#quizContainer {
+    max-width: 700px;
+    margin: 30px auto;
+    text-align: left;
+}
+
+.quiz-card {
+    background: #161b22;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 4px solid #58a6ff;
+}
+
+/* QUIZ OPTIONS */
+
+.quiz-card label {
+    display: block;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+/* RESULT SCREEN */
+
+#scoreText {
+    font-size: 22px;
+    margin: 20px 0;
+}
+
+/* MEME IMAGE */
+
+#memeImage {
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+/* CERTIFICATE */
+
+#certificateStage {
+    padding-top: 80px;
+}
+
+#certificateStage h1 {
+    font-size: 40px;
+}
+
+#certificateStage h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
