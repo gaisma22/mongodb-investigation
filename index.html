@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gotham Archive Investigation</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<!-- INTRO SCREEN -->
+
+<section id="intro" class="screen active">
+
+<h1>Gotham City Archive</h1>
+
+<div class="story">
+
+<p>
+Connection established…
+</p>
+
+<p>
+Accessing Gotham City internal archive system...
+</p>
+
+<p>
+Some criminal records appear incomplete.  
+Several entries have disappeared from the archive.
+</p>
+
+<p>
+Without these records, tracking criminals becomes difficult.
+</p>
+
+<p>
+Batman normally handles this system.
+</p>
+
+<p>
+But according to Alfred…
+</p>
+
+</div>
+
+<div class="alfred">
+
+<p><strong>ALFRED:</strong></p>
+
+<p>
+Batman is currently occupied in another dimension dealing with villains.
+</p>
+
+<p>
+Until he returns, the archive appears to be... your responsibility.
+</p>
+
+<p>
+If the archive fails, even Batman will have trouble tracking criminals.
+</p>
+
+<p>
+Gotham needs these records restored.
+</p>
+
+<p>
+Gotham needs you.
+</p>
+  
+</div>
+
+<button id="startBtn">Access Archive Terminal</button>
+
+</section>
+
+
+<!-- TERMINAL SCREEN -->
+
+<section id="terminalStage" class="screen">
+
+<h2>Gotham Archive Terminal</h2>
+
+<div class="terminal">
+
+<div id="terminalOutput"></div>
+
+<div class="terminal-input">
+
+<span class="prompt">gotham&gt;</span>
+
+<input
+type="text"
+id="terminalInput"
+autocomplete="off"
+placeholder="type a command..."
+>
+
+</div>
+
+</div>
+
+<div class="alfred-hint">
+
+<p id="alfredHint">
+ALFRED: Try exploring the system. Perhaps start by seeing what databases exist.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- QUIZ STAGE -->
+
+<section id="quizStage" class="screen">
+
+<h2>Archive Knowledge Test</h2>
+
+<p>
+You repaired the Gotham archive.  
+Now let's confirm you understand the system.
+</p>
+
+<div id="quizContainer"></div>
+
+<button id="submitQuiz">Submit Answers</button>
+
+</section>
+
+
+<!-- RESULT SCREEN -->
+
+<section id="resultStage" class="screen">
+
+<h2>Investigation Report</h2>
+
+<div id="scoreText"></div>
+
+<img id="memeImage" src="" alt="result meme">
+
+<button id="restartGame">Restart Investigation</button>
+
+</section>
+
+
+<!-- CERTIFICATION SCREEN -->
+
+<section id="certificateStage" class="screen">
+
+<h1>Certification Unlocked</h1>
+
+<h2>Gotham Database Technician</h2>
+
+<p>
+The Gotham archive system is now stable.
+</p>
+
+<p>
+Batman will probably never know who fixed it.
+</p>
+
+<p>
+But Alfred does.
+</p>
+
+<div class="alfred">
+
+<p>
+ALFRED: Not bad. Gotham may survive after all.
+</p>
+
+</div>
+
+<button onclick="location.reload()">Investigate Again</button>
+
+</section>
+
+
+
+<!-- SCRIPTS -->
+
+<script src="js/terminal.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/game.js"></script>
+
+</body>
+</html>
