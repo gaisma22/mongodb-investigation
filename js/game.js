@@ -16,7 +16,6 @@ function typewriter(el, text, speed = 28, onDone) {
 // ─── Alfred Panel controller (shared between Stage 1 + 2) ────────────────────
 const AlfredPanel = (() => {
   let dialogueEl, instructionEl, currentDialogueTimer = null;
-  let skipTimers = [];
 
   function init(dialogueId, instructionId) {
     dialogueEl    = document.getElementById(dialogueId);
@@ -126,6 +125,7 @@ const Game = (() => {
 
 // ─── Intro UI — cinematic typewriter cutscene ─────────────────────────────────
 const IntroUI = (() => {
+  let skipTimers = [];
   const lines = [
     { text: "Connection established…",                         pause: 900  },
     { text: "Accessing Gotham City Archive System…",           pause: 1100 },
