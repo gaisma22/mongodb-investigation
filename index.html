@@ -1,191 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Gotham Archive Investigation</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MongoDB Investigation — Gotham Archive</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
-<!-- INTRO SCREEN -->
-
-<section id="intro" class="screen active">
-
-<h1>Gotham City Archive</h1>
-
-<div class="story">
-
-<p>
-Connection established…
-</p>
-
-<p>
-Accessing Gotham City internal archive system...
-</p>
-
-<p>
-Some criminal records appear incomplete.  
-Several entries have disappeared from the archive.
-</p>
-
-<p>
-Without these records, tracking criminals becomes difficult.
-</p>
-
-<p>
-Batman normally handles this system.
-</p>
-
-<p>
-But according to Alfred…
-</p>
-
-</div>
-
-<div class="alfred">
-
-<p><strong>ALFRED:</strong></p>
-
-<p>
-Batman is currently occupied in another dimension dealing with villains.
-</p>
-
-<p>
-Until he returns, the archive appears to be... your responsibility.
-</p>
-
-<p>
-If the archive fails, even Batman will have trouble tracking criminals.
-</p>
-
-<p>
-Gotham needs these records restored.
-</p>
-
-<p>
-Gotham needs you.
-</p>
-  
-</div>
-
-<button id="startBtn">Access Archive Terminal</button>
-
-</section>
-
-
-<!-- TERMINAL SCREEN -->
-
-<section id="terminalStage" class="screen">
-
-<h2>Gotham Archive Terminal</h2>
-
-<div class="terminal">
-
-<div id="terminalOutput"></div>
-
-<div class="terminal-input">
-
-<span class="prompt">gotham&gt;</span>
-
-<input
-type="text"
-id="terminalInput"
-autocomplete="off"
-placeholder="type a command..."
->
-
-</div>
-
-</div>
-
-<div class="alfred-hint">
-
-<p id="alfredHint">
-ALFRED: Try exploring the system. Perhaps start by seeing what databases exist.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- QUIZ STAGE -->
-
-<section id="quizStage" class="screen">
-
-<h2>Archive Knowledge Test</h2>
-
-<p>
-You repaired the Gotham archive.  
-Now let's confirm you understand the system.
-</p>
-
-<div id="quizContainer"></div>
-
-<button id="submitQuiz">Submit Answers</button>
-
-</section>
-
-
-<!-- RESULT SCREEN -->
-
-<section id="resultStage" class="screen">
-
-<h2>Investigation Report</h2>
-
-<div id="scoreText"></div>
-
-<img id="memeImage" src="" alt="result meme">
-
-<button id="restartGame">Restart Investigation</button>
-
-</section>
-
-
-<!-- CERTIFICATION SCREEN -->
-
-<section id="certificateStage" class="screen">
-
-<h1>Certification Unlocked</h1>
-
-<h2>Gotham Database Technician</h2>
-
-<p>
-The Gotham archive system is now stable.
-</p>
-
-<p>
-Batman will probably never know who fixed it.
-</p>
-
-<p>
-But Alfred does.
-</p>
-
-<div class="alfred">
-
-<p>
-ALFRED: Not bad. Gotham may survive after all.
-</p>
-
-</div>
-
-<button onclick="location.reload()">Investigate Again</button>
-
-</section>
-
-
-
-<!-- SCRIPTS -->
-
-<script src="js/terminal.js"></script>
-<script src="js/quiz.js"></script>
-<script src="js/game.js"></script>
-
+  <!-- ── INTRO SCREEN ───────────────────────────────────────── -->
+  <div id="intro-screen" class="screen active">
+    <div class="intro-header">
+      <!-- Replace src with your Batman logo image -->
+      <img src="assets/images/batman-logo.webp" alt="Batman" class="batman-logo" onerror="this.style.display='none';document.getElementById('bat-fallback').style.display='block'"/>
+      <span id="bat-fallback" style="display:none;font-size:3.5rem;">🦇</span>
+      <div class="intro-title">GOTHAM ARCHIVE SYSTEM</div>
+      <div class="intro-subtitle">MONGODB INVESTIGATION — V1.0</div>
+    </div>
+
+    <div class="cutscene-box">
+      <span class="ct-label">// SYSTEM LOG</span>
+      <div id="cutscene-text"></div>
+    </div>
+
+    <div id="intro-form" class="intro-form" style="display:none;opacity:0;">
+      <label for="investigator-name">ENTER YOUR INVESTIGATOR NAME</label>
+      <input
+        type="text"
+        id="investigator-name"
+        placeholder="e.g. Gordon, Jim"
+        maxlength="40"
+        autocomplete="off"
+      />
+      <button id="start-btn" class="btn-primary">BEGIN INVESTIGATION</button>
+      <button id="skip-intro-btn">SKIP ↓</button>
+    </div>
+  </div>
+
+  <!-- ── TERMINAL SCREEN — Stage 1 ─────────────────────────── -->
+  <div id="terminal-screen" class="screen">
+    <div class="terminal-panel">
+      <div class="terminal-header">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">gotham_archive — investigation terminal</div>
+        <div id="terminal-progress" class="stage-progress">Stage 1 — Command 0 / 7</div>
+      </div>
+      <div id="terminal-output" class="terminal-output"></div>
+      <div class="terminal-input-row">
+        <span class="input-prompt">gotham &gt;</span>
+        <input type="text" id="terminal-input" placeholder="type a command…" autocomplete="off" spellcheck="false" />
+        <button id="terminal-hint-btn" class="hint-btn">HINT</button>
+      </div>
+    </div>
+
+    <div class="alfred-panel">
+      <div class="alfred-header">
+        <!-- Replace src with your Alfred cartoon face image -->
+        <img src="assets/images/alfred-face.webp" alt="Alfred" class="alfred-avatar-img" onerror="this.style.display='none';document.getElementById('alfred-fallback-1').style.display='block'"/>
+        <span id="alfred-fallback-1" style="display:none;font-size:1.8rem;">🎩</span>
+        <div>
+          <div class="alfred-name">ALFRED</div>
+          <div class="alfred-status">Archive Administrator</div>
+        </div>
+      </div>
+      <div class="alfred-body">
+        <div id="alfred-dialogue" class="alfred-dialogue"></div>
+        <div class="alfred-divider"></div>
+        <div id="alfred-instruction" class="alfred-instruction"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── REPAIR SCREEN — Stage 2 ───────────────────────────── -->
+  <div id="repair-screen" class="screen">
+    <div class="terminal-panel">
+      <div class="terminal-header">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">gotham_archive — repair terminal</div>
+        <div id="repair-progress" class="stage-progress">Stage 2 — Repair 0 / 3</div>
+      </div>
+      <div id="repair-output" class="terminal-output"></div>
+      <div class="terminal-input-row">
+        <span class="input-prompt">gotham &gt;</span>
+        <input type="text" id="repair-input" placeholder="type a repair command…" autocomplete="off" spellcheck="false" />
+        <button id="repair-hint-btn" class="hint-btn">HINT</button>
+      </div>
+    </div>
+
+    <div class="alfred-panel">
+      <div class="alfred-header">
+        <img src="assets/images/alfred-face.png" alt="Alfred" class="alfred-avatar-img" onerror="this.style.display='none';document.getElementById('alfred-fallback-2').style.display='block'"/>
+        <span id="alfred-fallback-2" style="display:none;font-size:1.8rem;">🎩</span>
+        <div>
+          <div class="alfred-name">ALFRED</div>
+          <div class="alfred-status">Archive Administrator</div>
+        </div>
+      </div>
+      <div class="alfred-body">
+        <div id="repair-alfred-dialogue" class="alfred-dialogue"></div>
+        <div class="alfred-divider"></div>
+        <div id="repair-alfred-instruction" class="alfred-instruction"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUIZ SCREEN — Stage 3 ─────────────────────────────── -->
+  <div id="quiz-screen" class="screen">
+    <div class="quiz-header">
+      <div class="quiz-title">CARD CHALLENGE</div>
+      <div id="quiz-progress" class="stage-progress">Question 1 of 6</div>
+    </div>
+    <div id="quiz-container"></div>
+  </div>
+
+  <!-- ── RESULTS SCREEN ────────────────────────────────────── -->
+  <div id="results-screen" class="screen">
+    <div class="results-inner">
+      <div class="results-title">ARCHIVE RESTORATION REPORT</div>
+
+      <div class="restoration-block">
+        <div class="restoration-label">Gotham Archive Restoration</div>
+        <div id="restoration-pct" class="restoration-pct">0%</div>
+        <div id="quiz-score-display" class="quiz-score-small">Quiz: 0 / 6</div>
+      </div>
+
+      <div id="alfred-results-report" class="alfred-results-report"></div>
+
+      <img id="results-meme" class="results-meme" src="" alt="" style="display:none" />
+
+      <button id="proceed-resources-btn" class="btn-primary">CONTINUE LEARNING</button>
+    </div>
+  </div>
+
+  <!-- ── RESOURCE HUB SCREEN ───────────────────────────────── -->
+  <div id="resources-screen" class="screen">
+    <div class="resources-inner">
+
+      <div class="resources-header">
+        <div class="resources-title">CONTINUE LEARNING MONGODB</div>
+        <div class="resources-subtitle">
+          ALFRED:<br>
+          The archive is restored. But knowledge, unlike criminals,<br>
+          should never be contained. Here is where to go next.
+        </div>
+      </div>
+
+      <div class="resources-grid">
+
+        <a href="https://www.mongodb.com/docs/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">📖</div>
+          <div class="resource-info">
+            <div class="resource-name">MongoDB Official Docs</div>
+            <div class="resource-desc">The complete reference. Every command, every operator, every option. Straight from the source.</div>
+          </div>
+          <div class="resource-arrow">↗</div>
+        </a>
+
+        <a href="https://learn.mongodb.com/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🎓</div>
+          <div class="resource-info">
+            <div class="resource-name">MongoDB University</div>
+            <div class="resource-desc">Free structured courses from beginner to advanced. Official certification available.</div>
+          </div>
+          <div class="resource-arrow">↗</div>
+        </a>
+
+        <a href="https://www.youtube.com/results?search_query=mongodb+tutorial+for+beginners" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">▶</div>
+          <div class="resource-info">
+            <div class="resource-name">Beginner MongoDB Tutorial</div>
+            <div class="resource-desc">Video walkthroughs for visual learners. See MongoDB in action with real projects.</div>
+          </div>
+          <div class="resource-arrow">↗</div>
+        </a>
+
+        <a href="https://www.mongodb.com/docs/atlas/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">☁</div>
+          <div class="resource-info">
+            <div class="resource-name">MongoDB Atlas Guide</div>
+            <div class="resource-desc">Deploy MongoDB to the cloud. Free tier available. The next step after local databases.</div>
+          </div>
+          <div class="resource-arrow">↗</div>
+        </a>
+
+      </div>
+
+      <div class="github-card">
+        <div class="github-card-left">
+          <div class="github-icon">⌥</div>
+          <div class="github-info">
+            <div class="github-title">Suggest an Improvement</div>
+            <div class="github-desc">Found a bug? Have an idea? Open an issue or contribute directly on GitHub.</div>
+          </div>
+        </div>
+        <a href="https://github.com/gaisma22/mongodb-investigation" target="_blank" rel="noopener" class="btn-github">
+          VIEW ON GITHUB ↗
+        </a>
+      </div>
+
+      <button id="proceed-cert-btn" class="btn-primary" style="max-width:280px">
+        VIEW CERTIFICATE →
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ── CERTIFICATE SCREEN — Stage 4 ──────────────────────── -->
+  <div id="certificate-screen" class="screen">
+    <div class="certificate-box">
+      <img src="assets/images/batman-logo.webp" alt="Batman" class="cert-logo-img" onerror="this.style.display='none';document.getElementById('cert-bat-fallback').style.display='block'"/>
+      <span id="cert-bat-fallback" style="display:none;font-size:2rem;">🦇</span>
+
+      <div class="cert-system">GOTHAM CITY ARCHIVE SYSTEM</div>
+      <div class="cert-title">Certificate of Investigation</div>
+      <div class="cert-awarded">This certifies that</div>
+      <div id="cert-name" class="cert-name">Investigator</div>
+      <div class="cert-role">GOTHAM DATABASE TECHNICIAN</div>
+
+      <div class="cert-meta">
+        <span>Quiz Score: <em id="cert-score">—</em></span>
+        <span><em id="cert-restoration">—</em></span>
+        <span>Certificate ID: <em id="cert-id">—</em></span>
+        <span>Issued: <em id="cert-date">—</em></span>
+      </div>
+
+      <div class="cert-signature">— Alfred Pennyworth, Gotham Archive Administrator —</div>
+
+      <div class="cert-buttons">
+        <button id="download-cert-btn" class="btn-primary">⬇ DOWNLOAD CERTIFICATE</button>
+        <button id="restart-btn" class="btn-secondary">↺ NEW INVESTIGATION</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <script src="js/archive.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/repair.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/game.js"></script>
 </body>
 </html>
