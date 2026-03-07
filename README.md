@@ -13,8 +13,6 @@ The experience is split into four stages.
 **Stage 1 — Terminal Investigation**
 You explore the Gotham Archive using read commands. Alfred walks you through each one. By the end you will have found three corruptions hiding inside the criminal records.
 
-![Terminal Stage](assets/screenshots/terminal.png)
-
 **Stage 2 — Fix Gotham Archive**
 You fix what you found. One record needs its status updated. One is completely missing and needs to be inserted from scratch. One is a duplicate that needs to be removed.
 
