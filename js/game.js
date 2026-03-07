@@ -310,6 +310,7 @@ const RepairUI = (() => {
     const hintBtn = document.getElementById("repair-hint-btn");
     hintBtn.replaceWith(hintBtn.cloneNode(true));
     document.getElementById("repair-hint-btn").addEventListener("click", showHint);
+    document.querySelector("#repair-screen .input-prompt").textContent = "gotham_archive >";
     inputEl.focus();
   }
 
@@ -376,7 +377,7 @@ function printPrompt(cmd) {
   const el   = getActiveOutput();
   const line = document.createElement("div");
   line.className = "t-line t-prompt";
-  line.innerHTML = `<span class="prompt-sym">gotham_archive &gt;</span> <span>${esc(cmd)}</span>`;
+  line.innerHTML = `<span class="prompt-sym">gotham &gt;</span> <span>${esc(cmd)}</span>`;
   el.appendChild(line);
   el.scrollTop = el.scrollHeight;
 }
