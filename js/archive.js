@@ -29,9 +29,9 @@ const GothamArchive = (() => {
 
   function getRestorationPercent() {
     return Math.round(
-      restoration.terminal * 0.30 +
-      restoration.repair   * 0.40 +
-      restoration.quiz     * 0.30
+      restoration.terminal * 0.10 +
+      restoration.repair   * 0.20 +
+      restoration.quiz     * 0.70
     );
   }
 
