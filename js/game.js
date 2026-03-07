@@ -376,7 +376,7 @@ function printPrompt(cmd) {
   const el   = getActiveOutput();
   const line = document.createElement("div");
   line.className = "t-line t-prompt";
-  line.innerHTML = `<span class="prompt-sym">gotham &gt;</span> <span>${esc(cmd)}</span>`;
+  line.innerHTML = `<span class="prompt-sym">gotham_archive &gt;</span> <span>${esc(cmd)}</span>`;
   el.appendChild(line);
   el.scrollTop = el.scrollHeight;
 }
