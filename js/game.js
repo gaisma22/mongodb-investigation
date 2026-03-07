@@ -29,8 +29,12 @@ const AlfredPanel = (() => {
     let delay = 0;
     lines.forEach((line, idx) => {
       const p = document.createElement("p");
-      p.className = "alfred-line";
-      p.textContent = line;
+      if (line === "") {
+        p.className = "alfred-spacer";
+      } else {
+        p.className = "alfred-line";
+        p.textContent = line;
+      }
       dialogueEl.appendChild(p);
 
       setTimeout(() => {
@@ -187,7 +191,15 @@ const IntroUI = (() => {
     });
   }
 
-  return { init };
+  function skip() {
+    skipTimers.forEach(t => clearTimeout(t));
+    skipTimers = [];
+    const form = document.getElementById("intro-form");
+    form.style.display = "flex";
+    setTimeout(() => { form.style.opacity = "1"; }, 80);
+  }
+
+  return { init, skip };
 })();
 
 // ─── Terminal UI — Stage 1 ────────────────────────────────────────────────────
@@ -211,7 +223,10 @@ const TerminalUI = (() => {
 
     updateProgress();
 
+    inputEl.removeEventListener("keydown", handleKey);
     inputEl.addEventListener("keydown", handleKey);
+    const hintBtn = document.getElementById("terminal-hint-btn");
+    hintBtn.replaceWith(hintBtn.cloneNode(true));
     document.getElementById("terminal-hint-btn").addEventListener("click", showHint);
     inputEl.focus();
   }
@@ -234,6 +249,10 @@ const TerminalUI = (() => {
       locked = true;
       printOutput(result.output);
       updateProgress();
+
+      if (Terminal.getProgress().current >= 3) {
+        document.querySelector("#terminal-screen .input-prompt").textContent = "gotham_archive >";
+      }
 
       if (result.complete) {
         printSystem("— Investigation complete. Proceeding to archive repair… —");
@@ -286,7 +305,10 @@ const RepairUI = (() => {
     });
 
     updateProgress();
+    inputEl.removeEventListener("keydown", handleKey);
     inputEl.addEventListener("keydown", handleKey);
+    const hintBtn = document.getElementById("repair-hint-btn");
+    hintBtn.replaceWith(hintBtn.cloneNode(true));
     document.getElementById("repair-hint-btn").addEventListener("click", showHint);
     inputEl.focus();
   }
@@ -483,6 +505,8 @@ const ResultsUI = (() => {
     memeEl.alt = `Batman ${meme.label}`;
     memeEl.style.display = "block";
 
+    const resBtn = document.getElementById("proceed-resources-btn");
+    resBtn.replaceWith(resBtn.cloneNode(true));
     document.getElementById("proceed-resources-btn").addEventListener("click", () => Game.goToResources());
   }
 
@@ -503,7 +527,11 @@ const CertificateUI = (() => {
     document.getElementById("cert-id").textContent         = certId;
     document.getElementById("cert-date").textContent       = date;
 
+    const dlBtn = document.getElementById("download-cert-btn");
+    dlBtn.replaceWith(dlBtn.cloneNode(true));
     document.getElementById("download-cert-btn").addEventListener("click", () => downloadCert(name, certId, date, percentage, restPct));
+    const rstBtn = document.getElementById("restart-btn");
+    rstBtn.replaceWith(rstBtn.cloneNode(true));
     document.getElementById("restart-btn").addEventListener("click", () => Game.restart());
   }
 
@@ -568,11 +596,7 @@ document.addEventListener("DOMContentLoaded", () => {
   IntroUI.init();
 
   document.getElementById("skip-intro-btn").addEventListener("click", () => {
-    skipTimers.forEach(t => clearTimeout(t));
-    skipTimers = [];
-    const form = document.getElementById("intro-form");
-    form.style.display = "flex";
-    setTimeout(() => { form.style.opacity = "1"; }, 80);
+    IntroUI.skip();
   });
 
   document.getElementById("start-btn").addEventListener("click", () => {
@@ -612,6 +636,8 @@ const ResourcesUI = (() => {
       }, 700);
     }
 
+    const certBtn = document.getElementById("proceed-cert-btn");
+    certBtn.replaceWith(certBtn.cloneNode(true));
     document.getElementById("proceed-cert-btn").addEventListener("click", () => Game.goToCertificate());
   }
 
