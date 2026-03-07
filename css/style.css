@@ -822,18 +822,6 @@ body {
     font-family: "JetBrains Mono", Consolas, "Courier New", monospace;
 }
 
-/* SCREEN HANDLING */
-
-.screen {
-    display: none;
-    padding: 40px;
-    text-align: center;
-}
-
-.screen.active {
-    display: block;
-}
-
 /* HEADINGS */
 
 h1, h2 {
