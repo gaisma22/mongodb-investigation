@@ -574,7 +574,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.style.display = "flex";
     setTimeout(() => { form.style.opacity = "1"; }, 80);
   });
-  
+
   document.getElementById("start-btn").addEventListener("click", () => {
     const name = document.getElementById("investigator-name").value.trim();
     Game.startGame(name);
