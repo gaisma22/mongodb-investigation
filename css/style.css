@@ -397,6 +397,8 @@ body::after {
 .alfred-instruction::-webkit-scrollbar-thumb { background: var(--green-dk); }
 
 /* Alfred animated lines — shared */
+.alfred-spacer { display: block; height: .75rem; }
+
 .alfred-line {
   opacity  : 0;
   transform: translateY(5px);
