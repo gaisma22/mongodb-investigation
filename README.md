@@ -1,81 +1,88 @@
-# MongoDB Investigation
+# MongoDB Investigation — Gotham Archive System
 
-An interactive webpage where users learn **MongoDB basics** by investigating and fixing a broken database in Gotham City.
+A browser-based project where you learn MongoDB by investigating a broken criminal database inside **Gotham City**.
 
-Instead of reading long tutorials, users explore a **terminal-style interface**, run commands, and repair missing records while being guided by **Alfred**.
-
----
-
-## What This Project Is
-
-This project is a small interactive learning experience.
-
-Users temporarily take responsibility for the **Gotham City Archive database** while Batman is busy dealing with villains.
-
-The system contains incomplete records and broken connections.
-Your job is to explore the database and help restore it.
-
-Learning happens through:
-
-* a simulated terminal
-* a short investigation story
-* hands-on MongoDB commands
-* a final quiz challenge
+No tutorials. No reading walls of text. You open a terminal, type commands, and **Alfred** explains what each one does as you go. The database has corrupted records and you have to fix them.
 
 ---
 
-## Learning Flow
+## How it works
 
-The experience is divided into four stages.
+The experience is split into four stages.
 
 **Stage 1 — Terminal Investigation**
-Explore the database and learn basic MongoDB commands.
+You explore the Gotham Archive using read commands. Alfred walks you through each one. By the end you will have found three corruptions hiding inside the criminal records.
 
 **Stage 2 — Fix Gotham Archive**
-Use commands to repair missing or incorrect records.
+You fix what you found. One record needs its status updated. One is completely missing and needs to be inserted from scratch. One is a duplicate that needs to be removed.
 
 **Stage 3 — Card Challenge**
-Answer 6 short questions based on what you discovered.
+Six questions based on what you just did. Your score affects the final restoration percentage.
 
 **Stage 4 — Certification**
+If the archive is restored, you get a certificate with your name, score, and restoration percentage. Downloadable as a PNG.
 
-If the system is restored successfully, you earn the title:
-
-**Gotham Database Technician**
-
----
-
-## Technologies Used
-
-The project uses simple technologies so it can run anywhere.
-
-* HTML
-* CSS
-* Vanilla JavaScript
-
-No installation required. Open the page and start the investigation.
+There is also a results screen with Alfred's assessment and a Batman meme depending on how well you did.
 
 ---
 
-## Project Structure
+## Commands you will use
+
+`show dbs` — list all databases
+
+`use <database>` — connect to a database
+
+`show collections` — see what collections exist inside
+
+`db.collection.find()` — get all documents
+
+`db.collection.find({filter})` — get filtered documents
+
+`db.collection.findOne({filter})` — get one specific document
+
+`db.collection.updateOne()` — update a field
+
+`db.collection.insertOne()` — add a new document
+
+`db.collection.deleteOne()` — remove a document
+
+---
+
+## Running it
+
+No installation needed. Just download the `.zip` file and open `index.html` in a browser and it works.
+
+---
+
+## Project structure
 
 ```
 mongodb-investigation/
-
-index.html
-style.css
-script.js
-
-assets/
-  memes/
-
-README.md
+├── index.html
+├── README.md
+├── css/
+│   └── style.css
+├── js/
+│   ├── archive.js
+│   ├── terminal.js
+│   ├── repair.js
+│   ├── quiz.js
+│   └── game.js
+└── assets/
+    ├── images/
+    └── memes/
 ```
+
+---
+
+## Scoring
+
+The restoration percentage comes from three things. Terminal stage is worth 30%, the repair stage is 40%, and the quiz is 30%. Alfred's final report changes based on where you land.
 
 ---
 
 ## Mission Brief
 
-If the archive fails, even Batman will have trouble tracking criminals.
+Batman is busy. If the archive fails, even Batman will have trouble tracking criminals.
 
 **Gotham needs you**.
