@@ -83,6 +83,6 @@ The restoration percentage comes from three things. Terminal stage is worth 30%,
 
 ## Mission Brief
 
-Batman is busy.  If the archive fails, even Batman will have trouble tracking criminals.
+Batman is busy. If the archive fails, even Batman will have trouble tracking criminals.
 
 **Gotham needs you**.
