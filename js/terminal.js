@@ -7,16 +7,13 @@ const Terminal = (() => {
     {
       command: "help",
       alfredDialogue: [
-        "Ah. You've arrived.",
-        "Master Wayne is currently occupied in another dimension,",
-        "dealing with an unspecified number of villains.",
-        "He left no forwarding address.",
-        "I am Alfred. Archive Administrator.",
-        "Reluctant babysitter.",
-        "You have been granted temporary investigator access",
-        "to the Gotham City Archive System.",
-        "Type commands into the terminal.",
-        "I will explain what each one does.",
+        "Good. You read the manual first.",
+        "Batman never does.",
+        "He simply punches things until they work.",
+        "",
+        "The help command lists every operation",
+        "available in this archive system.",
+        "Study them. You will need most of them today.",
         "And try not to delete anything important.",
         "Batman gets rather cross about that.",
       ],
@@ -42,7 +39,7 @@ Type a command to begin your investigation.`,
         "currently running on this system.",
         "Think of databases as separate filing rooms.",
         "Each one stores a different category of information.",
-        
+        "",
         "Gotham has three.",
         "admin — system administration. Do not touch.",
         "local — internal logs. Also best left alone.",
@@ -65,7 +62,7 @@ local          0.000GB`,
         "Rather like Batman himself.",
         "This command switches your active connection",
         "to the specified database.",
-        
+        "",
         "You are now inside gotham_archive.",
         "From here, all your commands will operate",
         "on Gotham's criminal records.",
@@ -87,7 +84,7 @@ local          0.000GB`,
       alfredDialogue: [
         "Collections are the folders inside a database.",
         "Each collection holds a specific type of document.",
-        
+        "",
         "You can see two here.",
         "criminal_records — every tracked suspect in Gotham.",
         "incidents — reported crimes and case files.",
@@ -113,7 +110,7 @@ incidents`,
         "You can see the records loading now.",
         "Penguin. Harley Quinn. Riddler.",
         "All present and accounted for.",
-        
+        "",
         "However...",
         "Do you notice something unusual?",
         "Look carefully at near the bottom of the list.",
@@ -140,7 +137,7 @@ incidents`,
         "I only want the books that are overdue.",
         "And missing.",
         "And possibly stolen by the Joker.",
-        
+        "",
         "Case C-104 appears.",
         "Name unknown. Alias unknown. Status: missing.",
         "This record should not exist in this state.",
@@ -164,7 +161,7 @@ incidents`,
         "Useful when you know exactly what you are looking for.",
         "Detectives call this targeted investigation.",
         "I call it not wasting Batman's time.",
-        
+        "",
         "There it is. Case C-104.",
         "Completely empty.",
         "No name. No alias. Status: missing.",
@@ -225,8 +222,18 @@ incidents`,
     };
   }
 
-  function getIntroDialogue()    { return steps[0].alfredDialogue; }
-  function getIntroInstruction() { return steps[0].alfredInstruction; }
+  function getIntroDialogue()    {
+    return [
+      "Ah. You've arrived.",
+      "I am Alfred. Archive Administrator.",
+      "Reluctant babysitter.",
+      "",
+      "The Gotham Archive requires your attention.",
+      "Type commands into the terminal.",
+      "I will explain what each one does.",
+    ];
+  }
+  function getIntroInstruction() { return "Begin by listing available commands.\n\nTry: help"; }
   function getCurrentHint()      { return getCurrentStep()?.command || null; }
   function getProgress()         { return { current: stepIndex, total: steps.length }; }
   function reset()               { stepIndex = 0; }
