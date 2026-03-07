@@ -1,217 +1,235 @@
-/*
-====================================================
-MongoDB Investigation Terminal Engine
-File: terminal.js
-Role: Controls terminal commands, story flow, and UI
-====================================================
-*/
+// terminal.js — Stage 1: Terminal Investigation Engine
 
+const Terminal = (() => {
+  let stepIndex = 0;
 
-/* ==========================================
-   DOM ELEMENTS
-========================================== */
+  const steps = [
+    {
+      command: "help",
+      alfredDialogue: [
+        "Ah. You've arrived.",
+        "Master Wayne is currently occupied in another dimension,",
+        "dealing with an unspecified number of villains.",
+        "He left no forwarding address.",
+        "I am Alfred. Archive Administrator.",
+        "Reluctant babysitter.",
+        "You have been granted temporary investigator access",
+        "to the Gotham City Archive System.",
+        "Type commands into the terminal.",
+        "I will explain what each one does.",
+        "And try not to delete anything important.",
+        "Batman gets rather cross about that.",
+      ],
+      alfredInstruction: "Start by listing the available databases.\n\nTry: show dbs",
+      execute: () =>
+`Available commands for Gotham Archive System:
+  show dbs               — list all databases
+  use <database>         — connect to a database
+  show collections       — list collections in current db
+  db.<collection>.find() — retrieve all documents
+  db.<collection>.findOne({filter})
+  db.<collection>.updateOne({filter},{$set:{...}})
+  db.<collection>.insertOne({...})
+  db.<collection>.deleteOne({filter})
 
-const output = document.getElementById("output");
-const input = document.getElementById("terminal-input");
-const choices = document.getElementById("choices");
+Type a command to begin your investigation.`,
+    },
 
+    {
+      command: "show dbs",
+      alfredDialogue: [
+        "Good. show dbs lists every database",
+        "currently running on this system.",
+        "Think of databases as separate filing rooms.",
+        "Each one stores a different category of information.",
+        
+        "Gotham has three.",
+        "admin — system administration. Do not touch.",
+        "local — internal logs. Also best left alone.",
+        "gotham_archive — this is what we need.",
+        "Gotham's entire criminal record history lives there.",
+        "Well. Most of it.",
+        "We shall see about the rest.",
+      ],
+      alfredInstruction: "Connect to the Gotham archive.\n\nTry: use gotham_archive",
+      execute: () =>
+`admin          0.000GB
+gotham_archive 0.004GB
+local          0.000GB`,
+    },
 
-/* ==========================================
-   GAME STATE
-========================================== */
+    {
+      command: "use gotham_archive",
+      alfredDialogue: [
+        "use — simple, direct, effective.",
+        "Rather like Batman himself.",
+        "This command switches your active connection",
+        "to the specified database.",
+        
+        "You are now inside gotham_archive.",
+        "From here, all your commands will operate",
+        "on Gotham's criminal records.",
+        "A word of caution.",
+        "Batman's entire case history is stored here.",
+        "Decades of detective work.",
+        "Please do not accidentally delete the Joker's file.",
+        "We would never hear the end of it.",
+      ],
+      alfredInstruction: "Now see what collections exist inside.\n\nTry: show collections",
+      execute: () => {
+        GothamArchive.useDatabase("gotham_archive");
+        return "switched to db gotham_archive";
+      },
+    },
 
-let stage = 0;
+    {
+      command: "show collections",
+      alfredDialogue: [
+        "Collections are the folders inside a database.",
+        "Each collection holds a specific type of document.",
+        
+        "You can see two here.",
+        "criminal_records — every tracked suspect in Gotham.",
+        "incidents — reported crimes and case files.",
+        "If Batman wants to find the Riddler,",
+        "he queries criminal_records.",
+        "If he wants to know which bank the Joker robbed last Tuesday,",
+        "he checks incidents.",
+        "Organised. Efficient. Entirely unlike the criminals inside it.",
+      ],
+      alfredInstruction: "Let us inspect the criminal records.\n\nTry: db.criminal_records.find()",
+      execute: () =>
+`criminal_records
+incidents`,
+    },
 
+    {
+      command: "db.criminal_records.find()",
+      alfredDialogue: [
+        "find() retrieves every document in a collection.",
+        "Think of it as opening a filing cabinet",
+        "and reading every single folder inside.",
+        "No filter. No limit. Everything.",
+        "You can see the records loading now.",
+        "Penguin. Harley Quinn. Riddler.",
+        "All present and accounted for.",
+        
+        "However...",
+        "Do you notice something unusual?",
+        "Look carefully at near the bottom of the list.",
+        "Case C-104. Name: Unknown. Status: missing.",
+        "Case C-105. Status: null.",
+        "That is not how a properly maintained archive looks.",
+        "Something is wrong here.",
+      ],
+      alfredInstruction: "Filter for only the missing records.\n\nTry: db.criminal_records.find({status:\"missing\"})",
+      execute: () => {
+        const docs = GothamArchive.find("criminal_records");
+        return formatDocs(docs);
+      },
+    },
 
-/* ==========================================
-   TERMINAL OUTPUT FUNCTION
-   Prints text into the terminal window
-========================================== */
+    {
+      command: 'db.criminal_records.find({status:"missing"})',
+      alfredDialogue: [
+        "Excellent. Now you are filtering.",
+        "By passing a condition inside find(),",
+        "you told the system: only show me records",
+        "where the status field equals 'missing'.",
+        "Rather like telling a librarian:",
+        "I only want the books that are overdue.",
+        "And missing.",
+        "And possibly stolen by the Joker.",
+        
+        "Case C-104 appears.",
+        "Name unknown. Alias unknown. Status: missing.",
+        "This record should not exist in this state.",
+        "A criminal with no identity in Gotham's archive",
+        "means Batman cannot track them.",
+        "This is a problem.",
+      ],
+      alfredInstruction: "Inspect that specific record in detail.\n\nTry: db.criminal_records.findOne({case_id:\"C-104\"})",
+      execute: () => {
+        const docs = GothamArchive.find("criminal_records", { status: "missing" });
+        return formatDocs(docs);
+      },
+    },
 
-function print(text, className = "") {
-    const line = document.createElement("div");
-    line.textContent = text;
+    {
+      command: 'db.criminal_records.findOne({case_id:"C-104"})',
+      alfredDialogue: [
+        "findOne() is find() with a purpose.",
+        "Instead of retrieving everything,",
+        "it stops at the first match and returns that single document.",
+        "Useful when you know exactly what you are looking for.",
+        "Detectives call this targeted investigation.",
+        "I call it not wasting Batman's time.",
+        
+        "There it is. Case C-104.",
+        "Completely empty.",
+        "No name. No alias. Status: missing.",
+        "This is not a minor formatting error.",
+        "This is a corrupted record.",
+        "And I suspect it is not the only one.",
+        "We have found the problem.",
+        "Now we must fix it.",
+        "Proceed to the repair stage.",
+        "Gotham is counting on you.",
+        "No pressure.",
+        "Well. Some pressure.",
+      ],
+      alfredInstruction: "Investigation complete. Proceeding to archive repair...",
+      execute: () => {
+        const doc = GothamArchive.findOne("criminal_records", { case_id: "C-104" });
+        return doc ? formatDocs([doc]) : "No record found.";
+      },
+      isLast: true,
+    },
+  ];
 
-    if (className) line.classList.add(className);
+  function formatDocs(docs) {
+    return docs.map(doc => {
+      const lines = Object.entries(doc)
+        .map(([k, v]) => `  ${k}: ${v === null ? "null" : `"${v}"`}`);
+      return `{\n${lines.join(",\n")}\n}`;
+    }).join("\n\n");
+  }
 
-    output.appendChild(line);
-    output.scrollTop = output.scrollHeight;
-}
+  function getCurrentStep() { return steps[stepIndex] || null; }
 
+  function processCommand(raw) {
+    const input = raw.trim();
+    const step  = getCurrentStep();
+    if (!step) return null;
 
-/* ==========================================
-   CHOICE BUTTON SYSTEM
-   Used for investigation decisions
-========================================== */
-
-function showChoices(options) {
-
-    choices.innerHTML = "";
-
-    options.forEach(option => {
-
-        const btn = document.createElement("button");
-
-        btn.className = "choice-btn";
-        btn.textContent = option.text;
-        btn.onclick = () => option.action();
-
-        choices.appendChild(btn);
-    });
-}
-
-function clearChoices() {
-    choices.innerHTML = "";
-}
-
-
-/* ==========================================
-   GAME INTRO
-========================================== */
-
-function startGame() {
-
-    print("ALFRED: Welcome Detective.", "alfred");
-    print("ALFRED: Gotham Financial Bank has suffered a data breach.");
-    print("ALFRED: We have recovered a compromised MongoDB server.");
-    print("ALFRED: Your task is to investigate it.");
-    print("");
-    print("Type: connect mongodb");
-}
-
-
-/* ==========================================
-   COMMAND PROCESSOR
-   Simulates MongoDB terminal commands
-========================================== */
-
-function handleCommand(cmd) {
-
-    if (stage === 0 && cmd === "connect mongodb") {
-
-        print("Connected to MongoDB server.");
-        print("Type: show dbs");
-
-        stage = 1;
-        return;
+    if (input === step.command) {
+      const output = step.execute();
+      const progress = stepIndex + 1;
+      stepIndex++;
+      // Update terminal restoration bucket
+      GothamArchive.setRestoration("terminal", Math.round((stepIndex / steps.length) * 100));
+      return {
+        success     : true,
+        output,
+        dialogue    : step.alfredDialogue,
+        instruction : step.alfredInstruction,
+        complete    : !!step.isLast,
+        progress,
+        total       : steps.length,
+      };
     }
 
-    if (stage === 1 && cmd === "show dbs") {
+    return {
+      success : false,
+      error   : `That command is not recognised by the Gotham archive system.\n\nALFRED:\nPerhaps try the hint button.\nEven Batman occasionally reads the instructions.\n\nExpected: ${step.command}`,
+    };
+  }
 
-        print("admin");
-        print("employees");
-        print("financial_records");
-        print("logs");
+  function getIntroDialogue()    { return steps[0].alfredDialogue; }
+  function getIntroInstruction() { return steps[0].alfredInstruction; }
+  function getCurrentHint()      { return getCurrentStep()?.command || null; }
+  function getProgress()         { return { current: stepIndex, total: steps.length }; }
+  function reset()               { stepIndex = 0; }
 
-        print("");
-        print("Which database should we investigate?");
-
-        showChoices([
-            { text: "employees", action: () => selectDB("employees") },
-            { text: "financial_records", action: () => selectDB("financial_records") },
-            { text: "logs", action: () => selectDB("logs") }
-        ]);
-
-        stage = 2;
-        return;
-    }
-
-    if (stage === 3 && cmd === "show collections") {
-
-        print("users");
-        print("transactions");
-        print("audit");
-
-        print("");
-        print("Investigate which collection?");
-
-        showChoices([
-            { text: "users", action: () => investigateUsers() },
-            { text: "transactions", action: () => wrongPath() },
-            { text: "audit", action: () => wrongPath() }
-        ]);
-
-        return;
-    }
-
-    print("Unknown command.");
-}
-
-
-/* ==========================================
-   DATABASE SELECTION
-========================================== */
-
-function selectDB(name) {
-
-    clearChoices();
-
-    print(`Using database: ${name}`);
-    print("Type: show collections");
-
-    stage = 3;
-}
-
-
-/* ==========================================
-   CORRECT INVESTIGATION PATH
-========================================== */
-
-function investigateUsers() {
-
-    clearChoices();
-
-    print("Searching user records...");
-    print("Suspicious login detected.");
-    print("User: root_admin");
-    print("IP: 185.223.89.12");
-
-    print("");
-    print("ALFRED: This IP belongs to a known criminal network.", "alfred");
-    print("ALFRED: Excellent work detective.");
-
-    print("");
-    print("CASE SOLVED");
-}
-
-
-/* ==========================================
-   WRONG PATH HANDLER
-========================================== */
-
-function wrongPath() {
-
-    clearChoices();
-
-    print("No useful information found.");
-    print("ALFRED: We may be looking in the wrong place.", "alfred");
-}
-
-
-/* ==========================================
-   TERMINAL INPUT LISTENER
-========================================== */
-
-input.addEventListener("keydown", function(e) {
-
-    if (e.key === "Enter") {
-
-        const cmd = input.value.trim();
-
-        if (!cmd) return;
-
-        print("> " + cmd);
-
-        handleCommand(cmd);
-
-        input.value = "";
-    }
-
-});
-
-
-/* ==========================================
-   GAME START
-========================================== */
-
-startGame();
+  return { processCommand, getCurrentStep, getIntroDialogue, getIntroInstruction, getCurrentHint, getProgress, reset };
+})();
