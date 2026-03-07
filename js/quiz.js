@@ -124,7 +124,7 @@ const Quiz = (() => {
         "Even Batman himself would trust these records.",
         "And Batman trusts very few things.",
         "You have done Gotham a genuine service.",
-        "I shall inform Master Wayne upon his return.",
+        "I shall inform Batman upon his return.",
         "From whichever dimension he is currently saving.",
       ],
     };
