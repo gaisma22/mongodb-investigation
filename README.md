@@ -77,7 +77,7 @@ mongodb-investigation/
 
 ## Scoring
 
-The restoration percentage comes from three things. Terminal stage is worth 30%, the repair stage is 40%, and the quiz is 30%. Alfred's final report changes based on where you land.
+The restoration percentage comes from three things. Terminal stage is worth 10%, the repair stage is 20%, and the quiz is 70%. Alfred's final report changes based on where you land.
 
 ---
 
