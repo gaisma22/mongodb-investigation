@@ -229,7 +229,7 @@ body::after {
 body:not(.noir) .active-icon   { filter: none; }
 body:not(.noir) .inactive-icon { filter: none; opacity: 0.6; }}
 
-body.noir .active-icon   { filter: brightness(0.4); }
+body.noir .active-icon   { filter: none; }
 body.noir .inactive-icon { filter: none; opacity: 0.6; }
 
 .theme-divider {
