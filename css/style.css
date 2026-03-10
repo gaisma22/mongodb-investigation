@@ -224,7 +224,7 @@ body::after {
   transition: opacity .2s, filter .2s;
 }
 .active-icon   { opacity: 1;   filter: none; }
-.inactive-icon { opacity: 0.3; filter: grayscale(1); }
+.inactive-icon { opacity: 0.6; filter: none; }
 
 body:not(.noir) .active-icon   { filter: none; }
 body:not(.noir) .inactive-icon { filter: none; opacity: 0.6; }}
