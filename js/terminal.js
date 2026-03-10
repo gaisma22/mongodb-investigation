@@ -231,6 +231,13 @@ incidents`,
       "The Gotham Archive requires your attention.",
       "Type commands into the terminal.",
       "I will explain what each one does.",
+      "",
+      "",
+      "One important note.",
+      "Commands in MongoDB are case sensitive.",
+      "Every character, space, and symbol must be exact.",
+      "Even a single misplaced letter will result in an error.",
+      "Follow my instructions precisely.",
     ];
   }
   function getIntroInstruction() { return "Begin by listing available commands.\n\nTry: help"; }
