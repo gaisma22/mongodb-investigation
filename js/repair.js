@@ -110,11 +110,12 @@ const Repair = (() => {
       stepIndex++;
       repairsDone++;
       GothamArchive.setRestoration("repair", Math.round((repairsDone / steps.length) * 100));
+      const nextStep = getCurrentStep();
       return {
         success     : true,
         output,
         dialogue    : step.alfredDialogue,
-        instruction : step.alfredInstruction,
+        instruction : nextStep ? nextStep.alfredInstruction : step.alfredInstruction,
         complete    : !!step.isLast,
       };
     }
