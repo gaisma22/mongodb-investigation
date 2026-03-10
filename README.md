@@ -14,7 +14,6 @@ The experience is split into four stages.
 You explore the Gotham Archive using read commands. Alfred walks you through each one. By the end you will have found three corruptions hiding inside the criminal records.
 
 &nbsp;
-
 ![Intro Screen](assets/screenshots/intro.jpg)
 *Intro — Gotham Archive System boots up and assigns you the investigation*
 
@@ -42,6 +41,10 @@ Six questions based on what you just did. Your score affects the final restorati
 *Stage 3 — card challenge testing your knowledge of MongoDB commands*
 
 &nbsp;
+
+![Card Challenge](assets/screenshots/terminal.jpg)
+*Stage 3 — restoration percentage and Alfred's final assessment*
+
 
 **Stage 4 — Certification**
 If the archive is restored, you get a certificate with your name, score, and restoration percentage. Downloadable as a PNG.
