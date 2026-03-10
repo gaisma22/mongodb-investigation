@@ -631,10 +631,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("noir", isNoir);
 
     if (isNoir) {
+      iconBat.src = "assets/images/noir/bat.png";
+      iconMagnifier.src = "assets/images/magnifier.png";
       iconBat.classList.replace("active-icon", "inactive-icon");
       iconMagnifier.classList.replace("inactive-icon", "active-icon");
       showToast("— Theme switched to NOIR mode —");
     } else {
+      iconBat.src = "assets/images/bat.png";
+      iconMagnifier.src = "assets/images/gotham/magnifier.png";
       iconMagnifier.classList.replace("active-icon", "inactive-icon");
       iconBat.classList.replace("inactive-icon", "active-icon");
       showToast("— Theme switched to GOTHAM mode —");
