@@ -42,7 +42,6 @@
   <div id="terminal-screen" class="screen">
     <div class="terminal-panel">
       <div class="terminal-header">
-        <div class="terminal-dots"><span></span><span></span><span></span></div>
         <div class="terminal-title">gotham_archive — investigation terminal</div>
         <div id="terminal-progress" class="stage-progress">Stage 1 — Command 0 / 7</div>
       </div>
@@ -76,7 +75,6 @@
   <div id="repair-screen" class="screen">
     <div class="terminal-panel">
       <div class="terminal-header">
-        <div class="terminal-dots"><span></span><span></span><span></span></div>
         <div class="terminal-title">gotham_archive — repair terminal</div>
         <div id="repair-progress" class="stage-progress">Stage 2 — Repair 0 / 3</div>
       </div>
@@ -235,12 +233,15 @@
   </div>
 
   <!-- ── Theme Toggle ──────────────────────────────────────────── -->
-  <button id="theme-toggle">
-    <img id="theme-icon" src="assets/images/bat.svg" alt="theme" />
-    GOTHAM
+  <button id="theme-toggle" title="Switch theme">
+    <img id="theme-icon-bat"       src="assets/images/bat.png"       alt="GOTHAM" class="theme-icon active-icon" />
+    <img id="theme-icon-magnifier" src="assets/images/magnifier.png" alt="NOIR"   class="theme-icon inactive-icon" />
   </button>
 
-  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <!-- ── Toast ─────────────────────────────────────────────────── -->
+  <div id="theme-toast"></div>
+
+  <!-- ── Scripts ────────────────────────────────────────────────  -->
   <script src="js/archive.js"></script>
   <script src="js/terminal.js"></script>
   <script src="js/repair.js"></script>
