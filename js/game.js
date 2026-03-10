@@ -58,7 +58,7 @@ const AlfredPanel = (() => {
       p.className = "alfred-line instruction-line";
       p.textContent = line;
       instructionEl.appendChild(p);
-      setTimeout(() => p.classList.add("visible"), i * 180 + 300);
+      setTimeout(() => p.classList.add("visible"), i * 80 + 50);
     });
   }
 
