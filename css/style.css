@@ -19,6 +19,26 @@
   --display  : 'Orbitron', monospace;
 }
 
+/* ── NOIR theme overrides ────────────────────────────────────── */
+body.noir {
+  --bg       : #f0ebe0;
+  --bg2      : #e4ddd0;
+  --bg3      : #d8d0c0;
+  --green    : #1a6e3c;
+  --green-dim: #2e8a52;
+  --green-dk : #b0c8b8;
+  --blue     : #2a5a8a;
+  --blue-dim : #5a7a9a;
+  --red      : #c0392b;
+  --yellow   : #8a6a00;
+  --white    : #1a1a2e;
+  --gray     : #7a7060;
+  background : #f0ebe0;
+  color      : #1a6e3c;
+}
+
+body.noir::after { display: none; }
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body { height: 100%; overflow: hidden; }
