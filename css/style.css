@@ -226,8 +226,11 @@ body::after {
 .active-icon   { opacity: 1;   filter: none; }
 .inactive-icon { opacity: 0.3; filter: grayscale(1); }
 
-body:not(.noir) .active-icon   { filter: invert(1); }
-body:not(.noir) .inactive-icon { filter: invert(1) grayscale(1); }
+body:not(.noir) .active-icon   { filter: none; }
+body:not(.noir) .inactive-icon { filter: invert(1); opacity: 0.35; }
+
+body.noir .active-icon   { filter: brightness(0.4); }
+body.noir .inactive-icon { filter: none; opacity: 0.35; }
 
 .theme-divider {
   color      : var(--gray);
@@ -235,6 +238,7 @@ body:not(.noir) .inactive-icon { filter: invert(1) grayscale(1); }
   opacity    : 0.4;
   line-height: 1;
 }
+body:not(.noir) .theme-divider { color: var(--white); }
 
 /* Toast */
 #theme-toast {
