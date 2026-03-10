@@ -610,6 +610,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("investigator-name").addEventListener("keydown", e => {
     if (e.key === "Enter") Game.startGame(e.target.value.trim());
   });
+
+  // ── Theme toggle ──────────────────────────────────────────────
+  const themeBtn  = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+  let isNoir = false;
+
+  themeBtn.addEventListener("click", () => {
+    isNoir = !isNoir;
+    document.body.classList.toggle("noir", isNoir);
+    themeIcon.src      = isNoir ? "assets/images/magnifier.svg" : "assets/images/bat.svg";
+    themeBtn.childNodes[2].textContent = isNoir ? "NOIR" : "GOTHAM";
+  });
 });
 
 // ─── Resources UI ─────────────────────────────────────────────────────────────
