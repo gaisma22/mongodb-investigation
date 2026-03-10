@@ -341,8 +341,8 @@ const RepairUI = (() => {
           setTimeout(() => Game.goToQuiz(), 2800);
         });
       } else {
+        AlfredPanel.setInstruction(result.instruction);
         AlfredPanel.setDialogue(result.dialogue, () => {
-          AlfredPanel.setInstruction(result.instruction);
           locked = false;
           inputEl.focus();
         });
