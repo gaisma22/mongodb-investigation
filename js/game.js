@@ -217,6 +217,7 @@ const TerminalUI = (() => {
     locked             = false;
 
     document.querySelector("#terminal-screen .input-prompt").textContent = "gotham >";
+    AlfredPanel.init("alfred-dialogue", "alfred-instruction");
     AlfredPanel.setDialogue(Terminal.getIntroDialogue(), () => {
       AlfredPanel.setInstruction(Terminal.getIntroInstruction());
     });
