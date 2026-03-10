@@ -612,15 +612,33 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ── Theme toggle ──────────────────────────────────────────────
-  const themeBtn  = document.getElementById("theme-toggle");
-  const themeIcon = document.getElementById("theme-icon");
-  let isNoir = false;
+  const themeBtn      = document.getElementById("theme-toggle");
+  const iconBat       = document.getElementById("theme-icon-bat");
+  const iconMagnifier = document.getElementById("theme-icon-magnifier");
+  const toast         = document.getElementById("theme-toast");
+  let isNoir    = false;
+  let toastTimer = null;
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("visible");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("visible"), 2200);
+  }
 
   themeBtn.addEventListener("click", () => {
     isNoir = !isNoir;
     document.body.classList.toggle("noir", isNoir);
-    themeIcon.src      = isNoir ? "assets/images/magnifier.svg" : "assets/images/bat.svg";
-    themeBtn.childNodes[2].textContent = isNoir ? "NOIR" : "GOTHAM";
+
+    if (isNoir) {
+      iconBat.classList.replace("active-icon", "inactive-icon");
+      iconMagnifier.classList.replace("inactive-icon", "active-icon");
+      showToast("— Theme switched to NOIR mode —");
+    } else {
+      iconMagnifier.classList.replace("active-icon", "inactive-icon");
+      iconBat.classList.replace("inactive-icon", "active-icon");
+      showToast("— Theme switched to GOTHAM mode —");
+    }
   });
 });
 
