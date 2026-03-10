@@ -262,8 +262,8 @@ const TerminalUI = (() => {
           setTimeout(() => Game.goToRepair(), 2800);
         });
       } else {
+        AlfredPanel.setInstruction(result.instruction);
         AlfredPanel.setDialogue(result.dialogue, () => {
-          AlfredPanel.setInstruction(result.instruction);
           locked = false;
           inputEl.focus();
         });
