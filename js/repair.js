@@ -115,7 +115,7 @@ const Repair = (() => {
         success     : true,
         output,
         dialogue    : step.alfredDialogue,
-        instruction : nextStep ? nextStep.alfredInstruction : step.alfredInstruction,
+        instruction : nextStep ? nextStep.alfredInstruction : "Archive repair complete.\n\nProceeding to certification challenge…",
         complete    : !!step.isLast,
       };
     }
