@@ -216,7 +216,7 @@ const TerminalUI = (() => {
     inputEl.value      = "";
     locked             = false;
 
-    AlfredPanel.init("alfred-dialogue", "alfred-instruction");
+    document.querySelector("#terminal-screen .input-prompt").textContent = "gotham >";
     AlfredPanel.setDialogue(Terminal.getIntroDialogue(), () => {
       AlfredPanel.setInstruction(Terminal.getIntroInstruction());
     });
@@ -377,7 +377,8 @@ function printPrompt(cmd) {
   const el   = getActiveOutput();
   const line = document.createElement("div");
   line.className = "t-line t-prompt";
-  line.innerHTML = `<span class="prompt-sym">gotham &gt;</span> <span>${esc(cmd)}</span>`;
+  const activePrompt = document.querySelector(".screen.active .input-prompt");
+  line.innerHTML = `<span class="prompt-sym">${activePrompt ? activePrompt.textContent : "gotham >"}</span> <span>${esc(cmd)}</span>`;
   el.appendChild(line);
   el.scrollTop = el.scrollHeight;
 }
