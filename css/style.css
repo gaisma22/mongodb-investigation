@@ -203,10 +203,10 @@ body::after {
 /* ── Theme toggle ────────────────────────────────────────────── */
 #theme-toggle {
   position     : fixed;
-  top          : .52rem;
-  left         : .85rem;
+  top          : .1rem;
+  left         : .7rem;
   background   : transparent;
-  border       : 1px solid var(--gray);
+  border       : none;
   padding      : .3rem .45rem;
   cursor       : pointer;
   border-radius: 2px;
@@ -219,17 +219,27 @@ body::after {
 #theme-toggle:hover { border-color: var(--green); }
 
 .theme-icon {
-  width     : 16px;
-  height    : 16px;
+  width     : 20px;
+  height    : 20px;
   transition: opacity .2s, filter .2s;
 }
 .active-icon   { opacity: 1;   filter: none; }
 .inactive-icon { opacity: 0.3; filter: grayscale(1); }
 
+body:not(.noir) .active-icon   { filter: invert(1); }
+body:not(.noir) .inactive-icon { filter: invert(1) grayscale(1); }
+
+.theme-divider {
+  color      : var(--gray);
+  font-size  : .6rem;
+  opacity    : 0.4;
+  line-height: 1;
+}
+
 /* Toast */
 #theme-toast {
   position      : fixed;
-  bottom        : 8rem;
+  bottom        : 5rem;
   left          : 1.2rem;
   background    : var(--bg2);
   border        : 1px solid var(--green-dim);
@@ -941,7 +951,7 @@ button {
     padding: 12px 20px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 0px;
     transition: all 0.2s ease;
 }
 
