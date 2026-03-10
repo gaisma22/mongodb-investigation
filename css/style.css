@@ -19,26 +19,6 @@
   --display  : 'Orbitron', monospace;
 }
 
-/* ── NOIR theme overrides ────────────────────────────────────── */
-body.noir {
-  --bg       : #f0ebe0;
-  --bg2      : #e4ddd0;
-  --bg3      : #d8d0c0;
-  --green    : #1a6e3c;
-  --green-dim: #2e8a52;
-  --green-dk : #b0c8b8;
-  --blue     : #2a5a8a;
-  --blue-dim : #5a7a9a;
-  --red      : #c0392b;
-  --yellow   : #8a6a00;
-  --white    : #1a1a2e;
-  --gray     : #7a7060;
-}
-
-body.noir { background: var(--bg); color: var(--green); }
-
-body.noir::after { display: none; }
-
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body { height: 100%; overflow: hidden; }
@@ -203,27 +183,48 @@ body::after {
 /* ── Theme toggle ────────────────────────────────────────────── */
 #theme-toggle {
   position     : fixed;
-  top          : 1.2rem;
-  left         : 1.2rem;
+  top          : .75rem;
+  left         : .85rem;
   background   : transparent;
   border       : 1px solid var(--gray);
-  color        : var(--gray);
-  font-family  : var(--mono);
-  font-size    : .65rem;
-  letter-spacing: .15em;
-  padding      : .3rem .5rem;
+  padding      : .3rem .45rem;
   cursor       : pointer;
   border-radius: 2px;
-  transition   : all .2s;
+  transition   : border-color .2s;
   z-index      : 200;
   display      : flex;
   align-items  : center;
-  gap          : .35rem;
-  line-height  : 1;
+  gap          : .4rem;
 }
-#theme-toggle:hover { border-color: var(--green); color: var(--green); }
-#theme-toggle img   { width: 16px; height: 16px; opacity: .6; transition: opacity .2s; }
-#theme-toggle:hover img { opacity: 1; }
+#theme-toggle:hover { border-color: var(--green); }
+
+.theme-icon {
+  width     : 16px;
+  height    : 16px;
+  transition: opacity .2s, filter .2s;
+}
+.active-icon   { opacity: 1;   filter: none; }
+.inactive-icon { opacity: 0.3; filter: grayscale(1); }
+
+/* Toast */
+#theme-toast {
+  position      : fixed;
+  bottom        : 1.5rem;
+  left          : 1.2rem;
+  background    : var(--bg2);
+  border        : 1px solid var(--green-dim);
+  color         : var(--green);
+  font-family   : var(--mono);
+  font-size     : .65rem;
+  letter-spacing: .12em;
+  padding       : .4rem .9rem;
+  border-radius : 2px;
+  z-index       : 300;
+  opacity       : 0;
+  pointer-events: none;
+  transition    : opacity .3s ease;
+}
+#theme-toast.visible { opacity: 1; }
 
 /* ── Buttons ─────────────────────────────────────────────────── */
 .btn-primary {
