@@ -163,7 +163,7 @@ body::after {
 
 #github-link {
   position: fixed;
-  bottom: 4rem;
+  bottom: 4.5rem;
   right: 1.5rem;
   background: transparent;
   border: 1px solid var(--gray);
