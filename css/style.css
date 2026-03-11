@@ -548,6 +548,11 @@ body:not(.noir) .theme-divider { color: var(--white); }
 .quiz-card.visible { opacity: 1; transform: translateY(0) scale(1); }
 .quiz-card.exit    { opacity: 0; transform: translateY(-10px) scale(.98); }
 
+body.noir .quiz-card        { background: #e4ddd0; border-color: #2e8a52; }
+body.noir .quiz-question    { color: #1a1a2e; }
+body.noir .quiz-option      { background: #d8d0c0; border-color: #7a7060; color: #1a1a2e; }
+body.noir .quiz-explanation { background: #d8d0c0; color: #7a7060; }
+
 .quiz-question {
   font-size    : .98rem;
   color        : var(--white);
