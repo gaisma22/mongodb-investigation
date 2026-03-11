@@ -537,51 +537,73 @@ const CertificateUI = (() => {
     rstBtn.replaceWith(rstBtn.cloneNode(true));
     document.getElementById("restart-btn").addEventListener("click", () => Game.restart());
   }
-
+  
   function downloadCert(name, certId, date, quizPct, restPct) {
     const canvas = document.createElement("canvas");
     canvas.width  = 960;
     canvas.height = 640;
     const ctx = canvas.getContext("2d");
 
-    ctx.fillStyle = "#0b0f14";
+    const isNoir = document.body.classList.contains("noir");
+
+    const col = isNoir ? {
+      bg      : "#f0ebe0",
+      border1 : "#1a6e3c",
+      border2 : "#b0c8b8",
+      accent  : "#1a6e3c",
+      title   : "#1a1a2e",
+      text    : "#1a1a2e",
+      gold    : "#8a6a00",
+      gray    : "#7a7060"
+    } : {
+      bg      : "#0b0f14",
+      border1 : "#33ff88",
+      border2 : "#1a3a2a",
+      accent  : "#33ff88",
+      title   : "#ffffff",
+      text    : "#ffffff",
+      gold    : "#ffd700",
+      gray    : "#888888"
+    };
+
+    ctx.fillStyle = col.bg;
     ctx.fillRect(0, 0, 960, 640);
 
-    ctx.strokeStyle = "#33ff88";
+    ctx.strokeStyle = col.border1;
     ctx.lineWidth   = 4;
     ctx.strokeRect(20, 20, 920, 600);
-    ctx.strokeStyle = "#1a3a2a";
+    ctx.strokeStyle = col.border2;
     ctx.lineWidth   = 1;
     ctx.strokeRect(32, 32, 896, 576);
 
     ctx.textAlign = "center";
 
-    ctx.fillStyle = "#33ff88";
+    ctx.fillStyle = col.accent;
     ctx.font      = "bold 13px monospace";
     ctx.fillText("GOTHAM CITY ARCHIVE SYSTEM", 480, 85);
 
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle = col.title;
     ctx.font      = "bold 38px monospace";
     ctx.fillText("Certificate of Investigation", 480, 150);
 
-    ctx.fillStyle = "#33ff88";
+    ctx.fillStyle = col.accent;
     ctx.font      = "15px monospace";
     ctx.fillText("This certifies that", 480, 205);
 
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle = col.title;
     ctx.font      = "bold 32px monospace";
     ctx.fillText(name, 480, 260);
 
-    ctx.fillStyle = "#ffd700";
+    ctx.fillStyle = col.gold;
     ctx.font      = "bold 16px monospace";
     ctx.fillText("GOTHAM DATABASE TECHNICIAN", 480, 310);
 
-    ctx.fillStyle = "#888";
+    ctx.fillStyle = col.gray;
     ctx.font      = "13px monospace";
     ctx.fillText(`Quiz Score: ${quizPct}%   |   Archive Restored: ${restPct}%`, 480, 370);
     ctx.fillText(`Certificate ID: ${certId}   |   Issued: ${date}`, 480, 395);
 
-    ctx.fillStyle = "#33ff88";
+    ctx.fillStyle = col.accent;
     ctx.font      = "13px monospace";
     ctx.fillText("— Alfred Pennyworth, Gotham Archive Administrator —", 480, 460);
 
