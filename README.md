@@ -32,14 +32,14 @@ Six questions based on what you just did. Your score affects the final restorati
 &nbsp;
 
 &nbsp;
-![Card Challenge](assets/screenshots/terminal.jpg)
+![Card Challenge](assets/screenshots/restore-results.png)
 &nbsp;
 
 **Stage 4 - Certification**
 If the archive is restored, you get a certificate with your name, score, and restoration percentage. Downloadable as a PNG.
 
 &nbsp;
-![Terminal Stage](assets/screenshots/terminal.jpg)
+![Certificate](assets/screenshots/certificate.png)
 &nbsp;
 
 > There is also a results screen with Alfred's assessment and a Batman meme depending on how well you did.
@@ -75,13 +75,13 @@ The archive supports two visual modes. Switch between them at any time using the
 **GOTHAM** - dark terminal aesthetic with green text and scanlines. Default mode.
 
 &nbsp;
-![Terminal Stage](assets/screenshots/terminal.jpg)
+![Gotham Mode](assets/screenshots/gotham-mode.png)
 &nbsp;
 
 **NOIR** - aged paper aesthetic with dark ink tones. Easier on the eyes in bright environments.
 
 &nbsp;
-![Terminal Stage](assets/screenshots/terminal.jpg)
+![Noir Mode](assets/screenshots/noir-mode.png)
 &nbsp;
 
 The theme carries across all stages including the downloadable certificate.
