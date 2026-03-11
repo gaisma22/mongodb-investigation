@@ -28,7 +28,7 @@ You fix what you found. One record needs its status updated. One is completely m
 Six questions based on what you just did. Your score affects the final restoration percentage.
 
 &nbsp;
-![Card Challenge](assets/screenshots/card challenge.png)
+![Card Challenge](assets/screenshots/cardchallenge.png)
 &nbsp;
 
 &nbsp;
