@@ -14,29 +14,25 @@ The experience is split into four stages.
 You explore the Gotham Archive using read commands. Alfred walks you through each one. By the end you will have found three corruptions hiding inside the criminal records.
 
 &nbsp;
-![Terminal Stage](assets/screenshots/terminal.jpg)
-*Stage 1 - terminal investigation uncovering corrupted criminal records*
+![Terminal Stage](assets/screenshots/terminal.png)
 &nbsp;
 
 **Stage 2 - Fix Gotham Archive**
 You fix what you found. One record needs its status updated. One is completely missing and needs to be inserted from scratch. One is a duplicate that needs to be removed.
 
 &nbsp;
-![Repair Stage](assets/screenshots/repair.jpg)
-*Stage 2 - archive repair using updateOne, insertOne, and deleteOne*
+![Repair Stage](assets/screenshots/repair.png)
 &nbsp;
 
 **Stage 3 - Card Challenge**
 Six questions based on what you just did. Your score affects the final restoration percentage.
 
 &nbsp;
-![Card Challenge](assets/screenshots/card-quiz.jpg)
-*Stage 3 - card challenge testing your knowledge of MongoDB commands*
+![Card Challenge](assets/screenshots/card challenge.png)
 &nbsp;
 
 &nbsp;
 ![Card Challenge](assets/screenshots/terminal.jpg)
-*Stage 3 - restoration percentage and Alfred's final assessment*
 &nbsp;
 
 **Stage 4 - Certification**
@@ -44,7 +40,6 @@ If the archive is restored, you get a certificate with your name, score, and res
 
 &nbsp;
 ![Terminal Stage](assets/screenshots/terminal.jpg)
-*Stage 1 - terminal investigation uncovering corrupted criminal records*
 &nbsp;
 
 > There is also a results screen with Alfred's assessment and a Batman meme depending on how well you did.
